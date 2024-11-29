@@ -1,54 +1,82 @@
-import { useState } from "react";
-import Alert from "./components/Alert";
-import Button from "./components/Button";
-import ListGroup from "./components/ListGroup";
-import ListGroupWithState from "./components/ListGroupWithState";
-import Message from "./Message";
-import { FcDownload } from "react-icons/fc";
-import { BsAirplaneEngines } from "react-icons/bs";
-import Header from "./components/Header/Header";
+import React, { useState } from "react";
 import "./App.css";
-import { Footer } from "./components/Footer/Footer";
-import Sidebar from "./components/SideBar";
-import LikeButton from "./components/LikeButton";
+import Counter from "./components/Counter";
+import StrictModeTest from "./components/StrictModeTest";
+import Drink from "./components/Drink";
+import Bugs from "./components/Bugs";
+import Navbar from "./components/Navbar";
+import Cart from "./components/Cart";
 
 function App() {
-  let items = [
-    "An item",
-    "A second item",
-    "A third item",
-    "A fourth item",
-    "And a fifth one",
-  ];
-  const handleSelectdItem = (item: string) => console.log(item);
-  const [alertVisable, setVisability] = useState(false);
+  const [items, setItems] = useState([
+    {
+      id: 1,
+      title: "First Item",
+      imgUrl:
+        "https://static.vecteezy.com/system/resources/thumbnails/025/282/026/small_2x/stock-of-mix-a-cup-coffee-latte-more-motive-top-view-foodgraphy-generative-ai-photo.jpg",
+      description: "description For First Item",
+    },
+    {
+      id: 2,
+      title: "Second Item",
+      imgUrl:
+        "https://wellingtonnz.bynder.com/transform/39cd535b-094b-4064-9cbb-e1e6ae1d1cc2/Customs-06?io=transform:fit,width:576",
+      description: "description For Second Item",
+    },
+    {
+      id: 3,
+      title: "Third Item",
+      imgUrl:
+        "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?cs=srgb&dl=pexels-chevanon-302899.jpg&fm=jpg",
+      description: "description For Third Item",
+    },
+    {
+      id: 4,
+      title: "Fourth Item",
+      imgUrl:
+        "https://media.istockphoto.com/id/1368207254/photo/woman-holding-a-cup-of-cafe-latte-in-cafe.jpg?s=612x612&w=0&k=20&c=qOYbpuMTo4HFog53B6nWslNs588K4725g1aZHNS03XQ=",
+      description: "description For Fourth Item",
+    },
+    {
+      id: 5,
+      title: "Fifth Item",
+      imgUrl: "https://www.upmenu.com/wp-content/uploads/2023/11/coffee.jpeg",
+      description: "description For Fifth Item",
+    },
+  ]);
+
   return (
     <div>
-      <LikeButton />
-      <FcDownload size="60" color="red" />
-      <BsAirplaneEngines size="70" color="red" />
-      {/* <ListGroupWithState
-         items={items}
-         heading="Cities"
-         OnSelectedItem={handleSelectdItem}
-       /> */}
-      {/* <Alert>
-        Hello <span>World</span>
-      </Alert> */}
-      {/* <Button color="primary" onClick={() => console.log("Clicked")}>
-        Click Here
-      </Button> */}
-      {/* {alertVisable && (
-        <Alert onClose={() => setVisability(false)}>
-          <strong>Holy guacamole!</strong> You should check in on some of those
-        </Alert>
-      )}
-      <Button color="primary" onClick={() => setVisability(true)}>
-        Show Alert
-      </Button> */}
-      <Header />
-      <Sidebar />
-      <Footer />
+      <Navbar itemCount={items.length} />
+      <div className="container">
+        <div className="row">
+          <Cart
+            items={items}
+            remove={(id: number) => {
+              setItems(items.filter((item) => item.id !== id));
+            }}
+          />
+        </div>
+      </div>
+      {/* <Counter /> */}
+      {/* <React.StrictMode>
+        <StrictModeTest />
+      </React.StrictMode> */}
+      {/* <Bugs />
+      <Drink />
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <StrictModeTest />
+          </div>
+          <div className="col">
+            <StrictModeTest />
+          </div>
+          <div className="col">
+            <StrictModeTest />
+          </div>
+        </div>
+      </div> */}
     </div>
   );
 }
